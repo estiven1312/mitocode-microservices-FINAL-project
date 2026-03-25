@@ -1,0 +1,26 @@
+meta {
+  name: CREATE-PAYMENT
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8081/api/v1/payments
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "codePayment": "PAY-1009",
+    "description": "Pago de servicio de documentos",
+    "currency": "USD",
+    "amount": 150.75
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,33 @@
+meta {
+  name: change-status
+  type: http
+  seq: 3
+}
+
+patch {
+  url: http://localhost:8088/api/v1/contracts/58f1ed0b-c443-4ebe-a153-2f73552a2f5c/status
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJTSUdOX0NPTlRSQUNUIiwiQVBQUk9WRV9DT05UUkFDVCIsIkNSRUFURV9DT05UUkFDVCJdLCJzdWIiOiJtaXRvY29kZSIsImlhdCI6MTc3NDM5OTkwMSwiZXhwIjoxNzc0NDAwODAxfQ._wUYpyfKFsKqUOi4JCaUr-wkxq5fmG3Q3rs_Dd1vB2I
+}
+
+body:json {
+  {
+    "action": "VALIDATE_BY_LEGAL",
+     "managerId": "8e8be425-929e-4477-8099-eb2307200833",
+    "approverId": "03a8cfc7-3795-4447-af60-e661cb9cc0d1",
+    "approverEmail": "testlegal@gmail.com",
+    "approverName": "TEST legal",
+    "comment": "VB BY LEGAL"
+  
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

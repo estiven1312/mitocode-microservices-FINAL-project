@@ -1,0 +1,17 @@
+# Keep Docker context minimal for the multi-stage Gradle build.
+*
+
+# Files required by Dockerfile COPY steps.
+!Dockerfile
+!.dockerignore
+!gradlew
+!gradlew.bat
+!gradle
+!gradle/**
+!settings.gradle.kts
+!build.gradle.kts
+!src
+!src/**
+
+# Extra safety in case generated artifacts appear under source tree.
+src/**/build/

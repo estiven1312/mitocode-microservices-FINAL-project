@@ -1,0 +1,24 @@
+meta {
+  name: ADD-OBLIGATION
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/contract-performance/b2659aa4-7fdf-4605-b407-c7fe32b5f0e7/obligations
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "description": "Entrega de credenciales",
+    "dueDate": "2026-06-15"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,6 @@
+auth:
+  bootstrap:
+    username: admin
+    password: admin
+server:
+  port: 8089

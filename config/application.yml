@@ -1,0 +1,50 @@
+accountability:
+  service:
+    url: http://accountability-microservice
+contract:
+  service:
+    url: http://contracts-microservice
+signature:
+  service:
+    url: http://localhost:9095/api/v1
+client:
+  service-url:
+    defaultZone: http://localhost:8761/eureka/
+  register-with-eureka: true
+  fetch-registry: true
+app:
+  kafka:
+    topics:
+      contract-signed: contract.signed.v1
+      contract-signed-retry: contract.signed.retry.v1
+auth:
+  jwt:
+    secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    access-token-expiration-seconds: 900
+    refresh-token-expiration-seconds: 604800
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus, metrics
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  otlp:
+    metrics:
+      export:
+        enabled: true
+        endpoint: http://localhost:4317
+        step: 30s
+    tracing:
+      endpoint: http://localhost:4317
+  tracing:
+    sampling:
+      probability: 1.0
+otel:
+  exporter:
+    otlp:
+      protocol: grpc
+      endpoint: http://localhost:4317

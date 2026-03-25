@@ -1,0 +1,38 @@
+meta {
+  name: CREATE-CONTRACT
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8088/api/v1/contracts
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJTSUdOX0NPTlRSQUNUIiwiQVBQUk9WRV9DT05UUkFDVCIsIkNSRUFURV9DT05UUkFDVCJdLCJzdWIiOiJtaXRvY29kZSIsImlhdCI6MTc3NDQwMjExMSwiZXhwIjoxNzc0NDAzMDExfQ.MyF--JAYJvBY0nuayAodRZw_LTl4HS6WUJuia76m3E0
+}
+
+body:json {
+  {
+    "name": "Contrato de Servicio TI 2026",
+    "description": "Soporte y mantenimiento de plataforma",
+    "type": "CONTRACT",
+    "serviceType": "SERVICE",
+    "startDate": "2026-03-10",
+    "endDate": "2026-12-31",
+    "thirdPartyId": "22222222-2222-2222-2222-111111111111",
+    "createdBy": "33333333-3333-3333-3333-333333333333",
+    "requestedArea": "44444444-4444-4444-4444-444444444444",
+    "requestedCompany": "55555555-5555-5555-5555-555555555555",
+    "amount": 15000.50,
+    "urlFile": "http://examples.com/pdf/12344"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

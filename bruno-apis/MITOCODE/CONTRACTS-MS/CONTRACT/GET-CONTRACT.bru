@@ -1,0 +1,20 @@
+meta {
+  name: GET-CONTRACT
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8088/api/v1/contracts/58f1ed0b-c443-4ebe-a153-2f73552a2f5c
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJTSUdOX0NPTlRSQUNUIiwiQVBQUk9WRV9DT05UUkFDVCIsIkNSRUFURV9DT05UUkFDVCJdLCJzdWIiOiJtaXRvY29kZSIsImlhdCI6MTc3NDM5OTYwNywiZXhwIjoxNzc0NDAwNTA3fQ.pUatwoL92WbYiz8PlcDoj9hsxVTnIMXejAHjzB4pHu4
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

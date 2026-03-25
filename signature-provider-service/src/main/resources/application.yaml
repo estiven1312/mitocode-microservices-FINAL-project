@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: signature-provider-service
+server:
+  servlet:
+    context-path: /api/v1
+  port: 9095

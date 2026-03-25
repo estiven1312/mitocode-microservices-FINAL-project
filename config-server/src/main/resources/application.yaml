@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/estiven1312/mitocode-microservices-project.git
+          search-paths: config
+          clone-on-start: true
+          default-label: main
+          username: ${GITHUB_USERNAME:estiven1312}
+          password: ${GITHUB_TOKEN:}
+          force-pull: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+server:
+  port: 8888

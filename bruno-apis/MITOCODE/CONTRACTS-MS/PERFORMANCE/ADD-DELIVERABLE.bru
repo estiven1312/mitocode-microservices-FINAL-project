@@ -1,0 +1,24 @@
+meta {
+  name: ADD-DELIVERABLE
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/contract-performance/613814ad-b576-4918-8493-6804aa066ee5/deliverables
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Cierre de sprint 3",
+    "description": "Entrega de funcionalidades comprometidas en sprint 3",
+    "scheduleDate": "2026-06-01"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

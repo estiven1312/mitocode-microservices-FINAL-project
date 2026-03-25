@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: contracts-microservice
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+resilience4j:
+  circuitbreaker:
+    instances:
+      createPaymentCircuitBreaker:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 3
+        #Errores de cliente (4xx) no se consideran fallos para el circuito, pero se registran como excepciones ignoradas
+        ignore-exceptions:
+          - org.springframework.web.client.HttpClientErrorException.BadRequest
+          - java.lang.IllegalArgumentException
+          - org.springframework.web.client.HttpClientErrorException.NotFound
+          - org.springframework.web.client.HttpClientErrorException.Conflict
+        #Errores de servidor (5xx) y otros errores relacionados con la red se consideran fallos para el circuito y se registran como excepciones de registro
+        record-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.util.concurrent.TimeoutException
+          - java.net.SocketTimeoutException
+          - java.util.concurrent.TimeoutException
+          - org.apache.hc.core5.http.ConnectionRequestTimeoutException
+          - java.io.IOException
+  retry:
+    instances:
+      checkPaymentRetry:
+        maxAttempts: 3
+        waitDuration: 2000
+        retryExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.util.concurrent.TimeoutException
+          - java.net.SocketTimeoutException
+          - java.util.concurrent.TimeoutException
+          - org.apache.hc.core5.http.ConnectionRequestTimeoutException
+          - java.io.IOException
+        ignore-exceptions:
+          #En el caso de retry, si es un error de cliente (4xx) no se reintentará, pero se registrará como excepción ignorada, debido a que generalmente estos errores no se resuelven con reintentos y podrían indicar un problema en la solicitud del cliente.
+          - org.springframework.web.client.HttpClientErrorException.BadRequest
+          - java.lang.IllegalArgumentException
+          - org.springframework.web.client.HttpClientErrorException.NotFound
+          - org.springframework.web.client.HttpClientErrorException.Conflict
+          - java.lang.IllegalArgumentException
+server:
+  servlet:
+    context-path: /api/v1
+
+app:
+  kafka:
+    group-id: contracts-microservice-group
+    topics:
+      contract-signed: contract.signed.v1
+      contract-signed-retry: contract.signed.retry.v1

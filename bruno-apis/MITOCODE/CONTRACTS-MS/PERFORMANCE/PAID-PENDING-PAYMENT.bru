@@ -1,0 +1,30 @@
+meta {
+  name: PAID-PENDING-PAYMENT
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:8088/api/v1/contract-performance/b2659aa4-7fdf-4605-b407-c7fe32b5f0e7/payments/1/paid
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJTSUdOX0NPTlRSQUNUIiwiQVBQUk9WRV9DT05UUkFDVCIsIkNSRUFURV9DT05UUkFDVCJdLCJzdWIiOiJtaXRvY29kZSIsImlhdCI6MTc3NDQwMjQ3MCwiZXhwIjoxNzc0NDAzMzcwfQ.pQJzlFxLLch73NSbp4MoeO_lxUlnUVOm5VFjrokf3K8
+}
+
+body:json {
+  {
+    "codePayment": "PAY-3007",
+    "amount": 1583.00,
+    "currency": "USD",
+    "dueDate": "2026-06-15"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

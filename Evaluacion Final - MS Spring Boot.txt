@@ -1,0 +1,89 @@
+EVALUACIÓN FINAL
+Fecha Máxima de presentación: 12 de Abril del 2026
+
+1. Implementación de una Arquitectura de Microservicios
+Crea una arquitectura de microservicios que represente un caso de negocio real, por
+ejemplo:
+Proceso de creación de pedido con confirmación de pago y actualización de
+inventario.
+El flujo debe constar de al menos dos pasos que permitan demostrar la orquestación con
+el patrón SAGA, incluyendo las acciones de compensación cuando un paso falle.
+La arquitectura debe cumplir con los siguientes requisitos funcionales y técnicos:
+
+Requisitos Generales
+●​ Caso de negocio: Define un proceso con al menos dos pasos consecutivos (por
+ejemplo: creación de pedido → validación de pago → actualización de stock).​
+●​ Orquestación con SAGA: Implementa el patrón SAGA para coordinar las
+transacciones distribuidas. Debe incluir compensaciones para revertir pasos
+anteriores en caso de error.​
+●​ Comunicación entre servicios: Las llamadas HTTP entre microservicios deben
+realizarse con RestClient (opcionalmente puedes usar Feign Client o
+RestTemplate).​
+●​ @CircuitBreaker: Aplica resiliencia ante fallos externos implementando
+@CircuitBreaker con Resilience4j en al menos una comunicación entre servicios.​
+●​ @Retry (Opcional): Implementa reintentos automáticos en caso de error transitorio.​
+●​ Config Server (Opcional): Centraliza la configuración de los microservicios
+mediante un Spring Cloud Config Server.​
+●​ Eureka: Implementa Eureka Server como servicio de descubrimiento y registra
+todos los microservicios como clientes.​
+●​ Bases de datos independientes: Cada microservicio debe tener su propia base de
+datos. Se puede usar cualquier motor relacional o no relacional.​
+
+●​ Mensajería (Kafka):​
+○​ Implementa un producer que emita eventos al topic correspondiente.​
+○​ Implementa un consumer/listener que reciba y procese mensajes desde
+Kafka.​
+○​ Es suficiente tener un servicio que actúe como consumer centralizado.​
+
+Seguridad
+●​ Implementa un servicio de autenticación encargado de generar un token JWT.​
+●​ Cada microservicio del flujo de negocio debe validar el token antes de procesar las
+solicitudes.​
+●​ El uso de @PreAuthorize en endpoints o servicios es opcional, pero recomendado
+para reforzar la seguridad.​
+
+Documentación y Observabilidad
+●​ Swagger: Documenta al menos un microservicio utilizando Springdoc OpenAPI o
+Swagger UI.​
+●​ API Gateway (Opcional): Implementa un gateway (por ejemplo, Spring Cloud
+Gateway) para centralizar las peticiones hacia los microservicios.​
+●​ Dashboard en Grafana (Opcional): Implementa un dashboard básico con Grafana
+y Prometheus para visualizar métricas de los servicios.​
+
+Infraestructura y Contenedores
+●​ Docker Compose:​
+○​ Incluye un archivo docker-compose.yml que contenga todas las
+dependencias necesarias para ejecutar el proyecto.​
+○​ El archivo debe permitir levantar los servicios de base de datos, Kafka,
+Zookeeper, no es necesario que los microservicios se levanten con docker,
+
+se pueden levantar desde el IDE.​
+○​ Si se implementan herramientas opcionales como Grafana o Prometheus,
+también deben incluirse dentro del Docker Compose.​
+
+El entorno debe poder ejecutarse con un solo comando:​
+​
+docker compose up -d
+
+2. Forma de Envío
+●​ Sube el código completo del proyecto a un repositorio público (GitHub, GitLab,
+Bitbucket, etc.).​
+●​ Configura correctamente el archivo .gitignore para evitar subir dependencias o
+configuraciones locales.​
+●​ Incluye el archivo docker-compose.yml y cualquier configuración adicional
+necesaria para ejecutar los servicios.​
+●​ Envía el enlace del repositorio y cualquier evidencia adicional (capturas o videos
+del flujo funcionando) al correo: cursos@mitocodenetwork.com​
+
+Sugerencias Adicionales
+●​ Documentación del Proyecto: Incluye un archivo README.md que describa el flujo
+de negocio, los microservicios implementados y las instrucciones para ejecutar el
+entorno (incluyendo Docker Compose).​
+●​ Estructura del Repositorio: Organiza los microservicios en carpetas
+independientes (por ejemplo: order-service, payment-service,
+inventory-service, auth-service, etc.).​
+●​ Verificación de Requisitos: Antes de enviar, revisa que todos los puntos técnicos
+estén implementados. Se recomienda hacer una lista de verificación (checklist)
+como autoevaluación.​
+
+

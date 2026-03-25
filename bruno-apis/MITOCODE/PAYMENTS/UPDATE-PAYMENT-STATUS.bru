@@ -1,0 +1,22 @@
+meta {
+  name: UPDATE-PAYMENT-STATUS
+  type: http
+  seq: 2
+}
+
+patch {
+  url: http://localhost:8081/api/v1/payments/PAY-6003/status
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "status": "APPROVED"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
