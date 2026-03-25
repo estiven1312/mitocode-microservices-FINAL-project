@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/estiven1312/mitocode-microservices-project.git
+          uri: https://github.com/estiven1312/mitocode-microservices-FINAL-project.git
           search-paths: config
           clone-on-start: true
           default-label: main
