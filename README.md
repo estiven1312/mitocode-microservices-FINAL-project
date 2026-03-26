@@ -180,6 +180,102 @@ curl -X POST "http://localhost:8090/signature/contract/{contractId}" \
   }'
 ```
 
+## Workflow de Aprobación de Contrato
+
+Para aprobar y firmar un contrato, se debe pasar por las siguientes etapas (enviar requests sequentially al endpoint `POST /api/v1/contracts/{id}/status`):
+
+### Etapa 1: Enviar a Revisión
+
+```bash
+curl -X POST "http://localhost:8088/api/v1/contracts/{id}/status" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "SUBMIT_FOR_REVIEW"
+  }'
+```
+
+### Etapa 2: Enviar a Aprobación de Gerente
+
+```bash
+curl -X POST "http://localhost:8088/api/v1/contracts/{id}/status" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "SEND_FOR_MANAGER_APPROVAL"
+  }'
+```
+
+### Etapa 3: Aprobar por Gerente
+
+```bash
+curl -X POST "http://localhost:8088/api/v1/contracts/{id}/status" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "APPROVE_BY_MANAGER",
+    "managerId": "8e8be425-929e-4477-8099-eb2307200833",
+    "approverId": "03a8cfc7-3795-4447-af60-e661cb9cc0d1",
+    "approverEmail": "test@gmail.com",
+    "approverName": "TEST USER",
+    "comment": "VB BY MANAGER"
+  }'
+```
+
+### Etapa 4: Enviar a Externo
+
+```bash
+curl -X POST "http://localhost:8088/api/v1/contracts/{id}/status" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "SEND_TO_EXTERNAL"
+  }'
+```
+
+### Etapa 5: Validar por Externo
+
+```bash
+curl -X POST "http://localhost:8088/api/v1/contracts/{id}/status" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "VALIDATE_BY_EXTERNAL",
+    "managerId": "8e8be425-929e-4477-8099-eb2307200833",
+    "approverId": "03a8cfc7-3795-4447-af60-e661cb9cc0d1",
+    "approverEmail": "test1@gmail.com",
+    "approverName": "TEST EXTERNAL",
+    "comment": "VB BY EXTERNAL"
+  }'
+```
+
+### Etapa 6: Enviar a Legal
+
+```bash
+curl -X POST "http://localhost:8088/api/v1/contracts/{id}/status" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "SEND_TO_LEGAL"
+  }'
+```
+
+### Etapa 7: Validar por Legal
+
+```bash
+curl -X POST "http://localhost:8088/api/v1/contracts/{id}/status" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "VALIDATE_BY_LEGAL",
+    "managerId": "8e8be425-929e-4477-8099-eb2307200833",
+    "approverId": "03a8cfc7-3795-4447-af60-e661cb9cc0d1",
+    "approverEmail": "testlegal@gmail.com",
+    "approverName": "TEST legal",
+    "comment": "VB BY LEGAL"
+  }'
+```
+
 ## Ejemplo: Login
 
 ```bash
